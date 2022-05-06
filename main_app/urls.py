@@ -1,7 +1,5 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.http import HttpResponse
+from django.urls import path
+from . import views
 
 class Finch:  # Note that parens are optional if not inheriting from another class
   def __init__(self, name, breed, description, age):
@@ -16,11 +14,8 @@ finches = [
   Finch('Raven', 'black tripod', '3 legged cat', 4)
 ]
 
-def home(request):
-    return HttpResponse('<h1>home page</h1>')
-
-def about(request):
-    return render(request, 'about.html')
-
-def finches_index(request):
-    return render(request, 'finches/index.html', {'finches': finches})
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('finches/', views.finches_index, name='index'),
+]
